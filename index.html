@@ -123,6 +123,59 @@
         </div>
     </section>
 
+    <!-- ★★★ 新增區塊：強力背書 (連郁婷律師 & 黃國昌委員) ★★★ -->
+    <section class="py-20 px-4 bg-slate-800 text-white border-y border-slate-700">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- 左側：背書文案 -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 text-blue-400">堅實的法律與國會後盾</h2>
+                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                    我們絕非孤軍奮戰。本工會籌備處已取得重量級勞權律師與國會力量的全力支持，從體制外包圍總公司，確保公司不敢對任何會員進行秋後算帳。
+                </p>
+                <div class="space-y-6">
+                    <div class="bg-slate-700/50 p-5 rounded-lg border border-slate-600">
+                        <h4 class="text-xl font-bold text-amber-400 mb-2">⚖️ 連郁婷 律師｜司法戰線</h4>
+                        <p class="text-slate-300 text-sm">知名勞權專業律師。擔任本會義務法律顧問，隨時準備代理會員啟動勞檢，並針對積欠加班費發動集體民事訴訟，讓違法潛規則無所遁形。</p>
+                    </div>
+                    <div class="bg-slate-700/50 p-5 rounded-lg border border-slate-600">
+                        <h4 class="text-xl font-bold text-amber-400 mb-2">🏛️ 黃國昌 委員｜國會監督</h4>
+                        <p class="text-slate-300 text-sm">最強悍的國營事業監督力量。將於立法院直接緊盯經濟部與總公司高層，杜絕任何搓湯圓與施壓基層的惡劣手段，要求全面落實勞基法。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：照片與名片卡 -->
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 連郁婷律師 照片卡 -->
+                <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl border border-slate-700 group">
+                    <!-- 請將下方的 src 網址替換為連律師的真實照片網址 -->
+                    <div class="aspect-[3/4] bg-slate-800 overflow-hidden">
+                        <img src="https://placehold.co/400x500/2c3e50/ffffff?text=連郁婷+律師" alt="連郁婷律師" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h5 class="font-bold text-lg text-white">連郁婷 律師</h5>
+                        <p class="text-blue-400 text-xs mt-1">本會法律顧問 / 勞權守護者</p>
+                    </div>
+                </div>
+
+                <!-- 黃國昌委員 照片卡 -->
+                <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl border border-slate-700 group">
+                    <!-- 請將下方的 src 網址替換為黃委員的真實照片網址 -->
+                    <div class="aspect-[3/4] bg-slate-800 overflow-hidden">
+                        <img src="https://placehold.co/400x500/2c3e50/ffffff?text=黃國昌+委員" alt="黃國昌委員" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h5 class="font-bold text-lg text-white">黃國昌 委員</h5>
+                        <p class="text-blue-400 text-xs mt-1">立法委員 / 國營事業防腐劑</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 區塊五：數位入會表單 -->
     <section id="join-section" class="py-20 px-4 bg-slate-900 text-white">
         <div class="max-w-md mx-auto">
             <h2 class="text-3xl font-bold text-center mb-4">加密入會申請</h2>
@@ -170,15 +223,12 @@
 </div>
 
 <script>
-    // 加上 try-catch 防呆機制，如果載入失敗會直接彈出警告，不會沒反應
     try {
         const { createApp, ref } = Vue;
 
-        // 系統金鑰
         const supabaseUrl = 'https://vzsdtofdjcvsrqlggdqr.supabase.co'; 
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6c2R0b2ZkamN2c3JxbGdnZHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MjA3MjcsImV4cCI6MjA5NzE5NjcyN30.hNdzzls0mLjYFZvbXjkjmoCDI8gwoz2xjk5T7rqQrjM';
         
-        // 【關鍵修復】將變數名稱改為 supabaseClient，避免與官方套件名稱衝突
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         createApp({
@@ -196,7 +246,6 @@
                     isSubmitting.value = true;
                     
                     try {
-                        // 使用 supabaseClient 寫入資料
                         const { data, error } = await supabaseClient
                             .from('payroll_feedback')
                             .insert([
@@ -216,7 +265,6 @@
 
                         alert(`入會申請已加密送出！\n\n您的資料已受到海外端對端加密保護，我們將盡快與您聯繫。`);
                         
-                        // 成功後清空表單
                         form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
 
                     } catch (error) {
