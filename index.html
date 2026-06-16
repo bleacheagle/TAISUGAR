@@ -3,148 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>台灣國營與泛公股事業勞工產業工會 | 奪回加班費</title>
+    <title>打碎血汗體制！台灣國營基層抗暴陣線</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* 隱藏滾動條但保留滾動功能 */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar-track { background: #111827; }
+        ::-webkit-scrollbar-thumb { background: #ef4444; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #dc2626; }
         html { scroll-behavior: smooth; }
+        /* 增加掃描線特效，營造地下反抗軍的數位感 */
+        .scanline {
+            position: relative;
+        }
+        .scanline::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-gray-100 text-slate-800 font-sans antialiased">
 
 <div id="app">
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <!-- 戰鬥導覽列 (暗黑紅底) -->
+    <nav class="fixed w-full z-50 bg-black/95 backdrop-blur-md shadow-2xl border-b border-red-900">
         <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="font-bold text-xl text-slate-900 tracking-wider">
-                🛡️ 台灣公共服務事業工會
+            <div class="font-black text-xl text-white tracking-widest flex items-center">
+                <span class="text-red-600 mr-2">⚔️</span> 台灣基層勞工抗暴陣線
             </div>
-            <a href="#join-section" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                匿名入會
+            <a href="#join-section" class="bg-red-700 hover:bg-red-600 text-white px-5 py-2 rounded font-bold transition-colors border border-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                加入反抗軍
             </a>
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 px-4 bg-slate-900 text-white text-center">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-                拿回屬於我們的加班費<br><span class="text-blue-400">這次，我們自己爭。</span>
+    <!-- 戰鬥宣言橫幅 (Hero) -->
+    <section class="pt-36 pb-24 px-4 bg-black text-white text-center scanline relative overflow-hidden">
+        <!-- 背景血色光暈 -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900/40 via-black to-black -z-10"></div>
+        
+        <div class="max-w-4xl mx-auto relative z-20">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight">
+                打碎無恥的血汗體制！<br>
+                <span class="text-red-500">奪回我們被搶走的血汗錢！</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed">
-                拒絕違法潛規則，拒絕失能的舊體制。<br>
-                誠摯邀請您匿名加入，集結過半力量，奪回勞工選擇權。
+            <p class="text-lg md:text-2xl text-gray-300 mb-10 leading-relaxed font-medium">
+                高層吃香喝辣，基層賣命做功德？<br>
+                御用工會裝死護航，把我們當成免洗耗材！<br>
+                不再跪著求，這次我們站起來，把屬於我們的錢連本帶利討回來！
             </p>
-            <a href="#join-section" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-lg text-lg shadow-lg shadow-blue-500/30 transition transform hover:-translate-y-1">
-                立即安全入會 ➔
+            <a href="#join-section" class="inline-block bg-red-600 hover:bg-red-500 text-white font-black py-5 px-10 rounded text-xl uppercase tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.6)] transition transform hover:-translate-y-1 border border-red-400">
+                立刻武裝，集結開戰 ➔
             </a>
-            <p class="mt-4 text-sm text-slate-400">⚠️ 請使用個人手機網路 (4G/5G) 瀏覽，切勿使用公司 Wi-Fi</p>
+            <p class="mt-6 text-sm text-red-400 font-bold bg-red-900/30 inline-block px-4 py-2 rounded border border-red-800">
+                ⚠️ 最高警戒：請使用個人手機 4G/5G 網路瀏覽，切勿使用公司內網！
+            </p>
         </div>
     </section>
 
-    <section class="py-20 px-4 bg-white">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">你還在「被自願」做功德嗎？</h2>
+    <!-- 怒火痛點對決 -->
+    <section class="py-20 px-4 bg-slate-900 border-b border-slate-800 text-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-black text-center mb-12 text-white">你還要忍受這些無恥的掠奪多久？</h2>
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-red-50 p-8 rounded-2xl border border-red-100 shadow-sm">
-                    <h3 class="text-xl font-bold text-red-700 mb-4">❌ 公司的違法現況</h3>
-                    <ul class="space-y-3 text-slate-700">
-                        <li>• 系統卡死，完全沒有加班費申請選項</li>
-                        <li>• 長官明示暗示，規定「一律只能補休」</li>
-                        <li>• 補休期限一到自動歸零，血汗白流</li>
-                        <li>• 體制內舊工會雙手一攤，幫公司背書</li>
+                <!-- 暴政篇 -->
+                <div class="bg-black p-8 rounded-xl border border-red-800 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-red-800 text-white text-xs font-black px-3 py-1 rounded-bl-lg">敵方暴政</div>
+                    <h3 class="text-2xl font-black text-red-500 mb-6 flex items-center">
+                        <span class="mr-3 text-3xl">🩸</span> 公司的嗜血罪狀
+                    </h3>
+                    <ul class="space-y-4 text-gray-300 font-medium text-lg">
+                        <li class="flex items-start"><span class="text-red-500 mr-2">✖</span> 系統惡意鎖死，強迫我們「被自願」做功德！</li>
+                        <li class="flex items-start"><span class="text-red-500 mr-2">✖</span> 恐嚇施壓，威脅「敢報加班費就試試看」！</li>
+                        <li class="flex items-start"><span class="text-red-500 mr-2">✖</span> 期限一到心血歸零，直接把我們的錢放進高層口袋！</li>
+                        <li class="flex items-start"><span class="text-red-500 mr-2">✖</span> 御用工會淪為資方走狗，聯手出賣基層勞工！</li>
                     </ul>
                 </div>
-                <div class="bg-emerald-50 p-8 rounded-2xl border border-emerald-100 shadow-sm">
-                    <h3 class="text-xl font-bold text-emerald-700 mb-4">✅ 勞動基準法真相</h3>
-                    <ul class="space-y-3 text-slate-700">
-                        <li>• 依第 32-1 條，加班費/補休選擇權在勞工</li>
-                        <li>• 公司單方面強制補休，面臨高額行政罰鍰</li>
-                        <li>• 補休未休畢，依法仍須折算加班費發給</li>
-                        <li>• 只要我們團結過半，公司依法無法拒絕協商</li>
+                
+                <!-- 反擊篇 -->
+                <div class="bg-black p-8 rounded-xl border border-amber-500 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-600 text-white text-xs font-black px-3 py-1 rounded-bl-lg">我方法理</div>
+                    <h3 class="text-2xl font-black text-amber-500 mb-6 flex items-center">
+                        <span class="mr-3 text-3xl">🔥</span> 這是我們開戰的籌碼
+                    </h3>
+                    <ul class="space-y-4 text-gray-300 font-medium text-lg">
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✔</span> 勞基法第32-1條是鐵板：要錢要假，<b>老子自己決定</b>！</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✔</span> 強制補休就是「惡意欠薪」，公司天天面臨百萬重罰！</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✔</span> 被吃掉的補休，依法一毛錢都不能少，全要吐出來！</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">✔</span> 只要斬獲過半兵力，資方就必須跪在談判桌前認錯！</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 px-4 bg-slate-100">
+    <!-- 武裝反擊計畫與資安防禦 -->
+    <section class="py-20 px-4 bg-black">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+            <!-- 戰略 -->
             <div>
-                <h2 class="text-3xl font-bold mb-8">我們的致勝戰略</h2>
-                <div class="space-y-6">
+                <h2 class="text-3xl font-black mb-10 text-white border-l-4 border-red-600 pl-4">我們的武裝反擊計畫</h2>
+                <div class="space-y-8">
                     <div class="flex">
-                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">隱密串聯</h4>
-                            <p class="text-slate-600 mt-1">透過本站全程加密註冊，公司高層無從得知您的身分。</p>
+                        <div class="flex-shrink-0 w-12 h-12 bg-red-900 border-2 border-red-500 text-red-100 rounded-full flex items-center justify-center font-black text-xl shadow-[0_0_15px_rgba(239,68,68,0.5)]">1</div>
+                        <div class="ml-5">
+                            <h4 class="text-2xl font-bold text-white">地下隱密建軍</h4>
+                            <p class="text-gray-400 mt-2">透過海外加密系統，躲過政風鷹犬的監視，無聲集結全台對體制憤怒的同志。</p>
                         </div>
                     </div>
                     <div class="flex">
-                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">2</div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">集結過半</h4>
-                            <p class="text-slate-600 mt-1">依法招募超過 50% 員工（目標 1500 人）加入本產業工會。</p>
+                        <div class="flex-shrink-0 w-12 h-12 bg-red-900 border-2 border-red-500 text-red-100 rounded-full flex items-center justify-center font-black text-xl shadow-[0_0_15px_rgba(239,68,68,0.5)]">2</div>
+                        <div class="ml-5">
+                            <h4 class="text-2xl font-bold text-white">兵力集結過半</h4>
+                            <p class="text-gray-400 mt-2">招募1500名死士，跨越法定的強制協商門檻，取得開戰的絕對正當性與法律武器。</p>
                         </div>
                     </div>
                     <div class="flex">
-                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">3</div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">強制協商與勞檢</h4>
-                            <p class="text-slate-600 mt-1">人數達標後，直接發動團體協約與跨縣市集體勞檢，公司無法拒絕。</p>
+                        <div class="flex-shrink-0 w-12 h-12 bg-red-600 border-2 border-red-400 text-white rounded-full flex items-center justify-center font-black text-xl shadow-[0_0_15px_rgba(239,68,68,0.8)]">3</div>
+                        <div class="ml-5">
+                            <h4 class="text-2xl font-bold text-red-400">全面發動總攻</h4>
+                            <p class="text-gray-300 mt-2">聯合全台勞檢發動突襲，偕同律師團提起集體訴訟，讓高層為他們的貪婪付出慘痛代價！</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="mr-2">🔒</span> 最高機密級保護
+            <!-- 資安防護盾 -->
+            <div class="bg-slate-900 p-8 rounded-xl shadow-2xl border border-slate-700 relative">
+                <div class="absolute -top-4 -right-4 text-5xl">🛡️</div>
+                <h2 class="text-2xl font-black mb-8 text-white border-b border-slate-700 pb-4">
+                    軍用級反查水表系統
                 </h2>
-                <ul class="space-y-4 text-slate-700">
+                <ul class="space-y-6 text-gray-300">
                     <li class="flex items-start">
-                        <span class="text-green-500 mr-2">✔</span>
-                        <div><strong>主機境外化：</strong>資料庫架設於海外雲端，政風與資訊處絕對無法查閱。</div>
+                        <span class="text-green-500 mr-3 text-xl font-black">✔</span>
+                        <div><strong class="text-white block text-lg">主機境外化：</strong>資料庫架設於海外雲端，徹底斬斷公司資訊處與政風處的追蹤黑手。</div>
                     </li>
                     <li class="flex items-start">
-                        <span class="text-green-500 mr-2">✔</span>
-                        <div><strong>名單絕對保密：</strong>未達過半協商門檻前，工會絕不對外公布會員名冊。</div>
+                        <span class="text-green-500 mr-3 text-xl font-black">✔</span>
+                        <div><strong class="text-white block text-lg">名單絕對死守：</strong>未達過半協商門檻前，這份抗暴名單就是最高機密，絕不對外洩露半個字。</div>
                     </li>
                     <li class="flex items-start">
-                        <span class="text-green-500 mr-2">✔</span>
-                        <div><strong>通訊隔離：</strong>本站不留存連線 IP，阻絕公司內網監控。</div>
+                        <span class="text-green-500 mr-3 text-xl font-black">✔</span>
+                        <div><strong class="text-white block text-lg">單向盲寫防護：</strong>系統設定只進不出，連駭客網軍都無法將名單撈出，絕對保障您的安全。</div>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section class="py-20 px-4 bg-slate-800 text-white border-y border-slate-700">
+    <!-- ★★★ 戰神律師背書 ★★★ -->
+    <section class="py-20 px-4 bg-slate-950 text-white border-y border-red-900/50">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             
             <div>
-                <h2 class="text-3xl font-bold mb-6 text-blue-400">堅實的法律後盾</h2>
-                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
-                    我們絕非孤軍奮戰。本工會籌備處已取得重量級勞權律師的全力支持，從體制外包圍總公司，確保公司不敢對任何會員進行秋後算帳。
+                <h2 class="text-4xl font-black mb-6 text-red-500">最強悍的開戰後盾</h2>
+                <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                    這是一場不死不休的殲滅戰。我們已集結頂尖的勞權戰神，將從體制外發動司法核彈，徹底輾壓那些自以為能隻手遮天的貪婪高層。
                 </p>
-                <div class="bg-slate-700/50 p-6 rounded-lg border border-slate-600">
-                    <h4 class="text-2xl font-bold text-amber-400 mb-3">⚖️ 連郁婷 律師｜司法戰線</h4>
-                    <p class="text-slate-300 leading-relaxed">知名勞權專業律師。擔任本會義務法律顧問，隨時準備代理會員啟動勞檢，並針對積欠加班費發動集體民事訴訟，讓違法潛規則無所遁形。</p>
+                <div class="bg-black p-6 rounded border border-slate-800 shadow-[0_0_15px_rgba(0,0,0,1)] relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                    <h4 class="text-3xl font-black text-amber-500 mb-3">⚖️ 連郁婷 律師｜司法戰神</h4>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        絕不妥協的勞權前鋒。擔任本陣線義務法律顧問，隨時準備代理會員啟動勞檢，發動集體民事訴訟，<strong class="text-white">讓資方連本帶利把錢吐出來，把違法長官送上法庭的斷頭台！</strong>
+                    </p>
                 </div>
             </div>
 
+            <!-- 橫向戰神照片 -->
             <div class="w-full">
-                <div class="bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-slate-700 group">
-                    <div class="aspect-video bg-slate-800 overflow-hidden relative">
-                        <img src="joy.jpg" alt="連郁婷律師" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="bg-black rounded border border-red-900/50 p-2 shadow-[0_0_30px_rgba(220,38,38,0.2)]">
+                    <div class="aspect-video bg-slate-900 overflow-hidden relative border border-slate-800">
+                        <img src="joy.jpg" alt="連郁婷律師" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                     </div>
-                    <div class="p-5 text-center bg-slate-900">
-                        <h5 class="font-bold text-xl text-white">連郁婷 律師</h5>
-                        <p class="text-blue-400 text-sm mt-1 tracking-widest">本會法律顧問 / 勞權守護者</p>
+                    <div class="pt-4 pb-2 text-center">
+                        <h5 class="font-black text-2xl text-white tracking-widest">連郁婷 律師</h5>
+                        <p class="text-red-500 text-sm mt-1 tracking-widest font-bold">本會法律顧問 / 勞權終結者</p>
                     </div>
                 </div>
             </div>
@@ -152,84 +193,92 @@
         </div>
     </section>
 
-    <section class="py-20 px-4 bg-slate-200 border-b border-slate-300">
+    <!-- ★★★ 罪證集中營 (圖片畫廊) ★★★ -->
+    <section class="py-20 px-4 bg-slate-900 border-b border-black">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4 text-slate-900">真實事證與基層心聲</h2>
-            <p class="text-center text-slate-600 mb-12">體制內工會看不見的，我們自己記錄。這些都是我們必須站出來的鐵證。</p>
+            <h2 class="text-3xl font-black text-center mb-4 text-red-500 tracking-wider">扒開體制的遮羞布：罪證集中營</h2>
+            <p class="text-center text-gray-400 mb-12 text-lg">那些高層想掩蓋的齷齪事、御用工會不敢講的真相，我們全部攤在陽光下。</p>
             
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-200 group">
-                    <div class="aspect-video bg-slate-300 overflow-hidden">
-                        <img src="evidence1.jpg" onerror="this.src='https://placehold.co/600x338/cbd5e1/475569?text=照片+1'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <!-- 罪證 1 -->
+                <div class="bg-black p-2 rounded border border-slate-800 group">
+                    <div class="aspect-video bg-slate-800 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-red-900/20 group-hover:bg-transparent transition-colors z-10"></div>
+                        <img src="evidence1.jpg" onerror="this.src='https://placehold.co/600x338/1e293b/ef4444?text=罪證+1'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
-                    <div class="p-4 border-t border-slate-100">
-                        <p class="text-sm font-bold text-slate-700 text-center">只能補休的違法公告截圖</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-200 group">
-                    <div class="aspect-video bg-slate-300 overflow-hidden">
-                        <img src="evidence2.jpg" onerror="this.src='https://placehold.co/600x338/cbd5e1/475569?text=照片+2'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    </div>
-                    <div class="p-4 border-t border-slate-100">
-                        <p class="text-sm font-bold text-slate-700 text-center">系統沒有加班費選項</p>
+                    <div class="p-4 text-center">
+                        <p class="text-base font-bold text-red-400">只有補休的無恥系統截圖</p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-200 group">
-                    <div class="aspect-video bg-slate-300 overflow-hidden">
-                        <img src="evidence3.jpg" onerror="this.src='https://placehold.co/600x338/cbd5e1/475569?text=照片+3'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <!-- 罪證 2 -->
+                <div class="bg-black p-2 rounded border border-slate-800 group">
+                    <div class="aspect-video bg-slate-800 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-red-900/20 group-hover:bg-transparent transition-colors z-10"></div>
+                        <img src="evidence2.jpg" onerror="this.src='https://placehold.co/600x338/1e293b/ef4444?text=罪證+2'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
-                    <div class="p-4 border-t border-slate-100">
-                        <p class="text-sm font-bold text-slate-700 text-center">基層員工的辛勞日常</p>
+                    <div class="p-4 text-center">
+                        <p class="text-base font-bold text-red-400">長官強迫做功德的鐵證對話</p>
+                    </div>
+                </div>
+
+                <!-- 罪證 3 -->
+                <div class="bg-black p-2 rounded border border-slate-800 group">
+                    <div class="aspect-video bg-slate-800 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-red-900/20 group-hover:bg-transparent transition-colors z-10"></div>
+                        <img src="evidence3.jpg" onerror="this.src='https://placehold.co/600x338/1e293b/ef4444?text=罪證+3'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-4 text-center">
+                        <p class="text-base font-bold text-red-400">基層被當免洗筷的血淚日常</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="join-section" class="py-20 px-4 bg-slate-900 text-white">
-        <div class="max-w-md mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4">加密入會申請</h2>
-            <p class="text-center text-slate-400 mb-8">所有資料經端對端加密，僅供工會法定造冊使用</p>
+    <!-- 數位入會表單 (誓約書) -->
+    <section id="join-section" class="py-24 px-4 bg-black text-white scanline">
+        <div class="max-w-md mx-auto relative z-20">
+            <h2 class="text-4xl font-black text-center mb-2 text-red-500 tracking-widest">簽署抗暴誓約</h2>
+            <p class="text-center text-gray-400 mb-10 text-sm">每一份加密送出的資料，都是射向貪腐體制的一發子彈</p>
             
-            <form @submit.prevent="submitForm" class="bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-700">
+            <form @submit.prevent="submitForm" class="bg-slate-900/80 backdrop-blur p-8 rounded border border-red-900 shadow-[0_0_40px_rgba(153,27,27,0.3)]">
                 
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-300 mb-2">真實姓名</label>
-                    <input v-model="form.name" type="text" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="請輸入本名">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-300 mb-2 tracking-wide">真實姓名 (造冊核對用)</label>
+                    <input v-model="form.name" type="text" required class="w-full px-4 py-3 bg-black border border-slate-700 rounded focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white font-bold" placeholder="輸入本名">
                 </div>
 
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-300 mb-2">身分證字號</label>
-                    <input v-model="form.idCard" type="text" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="法定入會必備">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-300 mb-2 tracking-wide">身分證字號 (法定入會必備)</label>
+                    <input v-model="form.idCard" type="text" required class="w-full px-4 py-3 bg-black border border-slate-700 rounded focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white font-bold uppercase" placeholder="大寫英文字母開頭">
                 </div>
 
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-300 mb-2">所屬單位 (處/部/站)</label>
-                    <input v-model="form.unit" type="text" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="例如：ＯＯ區處 / ＯＯ加油站">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-300 mb-2 tracking-wide">受困單位 (處/部/站)</label>
+                    <input v-model="form.unit" type="text" required class="w-full px-4 py-3 bg-black border border-slate-700 rounded focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white font-bold" placeholder="例如：ＯＯ區處 / ＯＯ加油站">
                 </div>
 
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-300 mb-2">私人手機號碼</label>
-                    <input v-model="form.phone" type="tel" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="09XX-XXX-XXX">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-300 mb-2 tracking-wide">私人聯絡手機</label>
+                    <input v-model="form.phone" type="tel" required class="w-full px-4 py-3 bg-black border border-slate-700 rounded focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white font-bold" placeholder="09XX-XXX-XXX">
                 </div>
 
-                <div class="mb-8">
-                    <label class="block text-sm font-medium text-slate-300 mb-2">私人 Email</label>
-                    <input v-model="form.email" type="email" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="禁用公司信箱">
+                <div class="mb-10">
+                    <label class="block text-sm font-bold text-gray-300 mb-2 tracking-wide">私人 Email (絕禁用公司信箱)</label>
+                    <input v-model="form.email" type="email" required class="w-full px-4 py-3 bg-black border border-slate-700 rounded focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white font-bold" placeholder="your_private@gmail.com">
                 </div>
 
-                <button type="submit" :disabled="isSubmitting" class="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-600 text-white font-bold py-4 px-4 rounded-lg transition-colors flex justify-center items-center">
-                    <span v-if="!isSubmitting">加密送出申請</span>
-                    <span v-else>處理中...</span>
+                <button type="submit" :disabled="isSubmitting" class="w-full bg-red-700 hover:bg-red-600 disabled:bg-slate-800 disabled:border-slate-700 disabled:text-gray-500 text-white font-black text-lg py-4 px-4 rounded border border-red-500 transition-all flex justify-center items-center shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+                    <span v-if="!isSubmitting">立刻武裝，加密送出申請</span>
+                    <span v-else class="animate-pulse">子彈上膛中...</span>
                 </button>
             </form>
         </div>
     </section>
 
-    <footer class="bg-black py-8 text-center text-slate-500 text-sm">
-        <p>© 2026 台灣公共服務事業工會籌備處. All rights reserved.</p>
+    <footer class="bg-black py-8 text-center text-slate-700 text-xs border-t border-slate-900 font-bold tracking-widest">
+        <p>NO MORE EXPLOITATION. <br> © 2026 台灣公共服務事業工會籌備處. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </div>
@@ -275,12 +324,12 @@
                             throw error;
                         }
 
-                        alert(`入會申請已加密送出！\n\n您的資料已受到海外端對端加密保護，我們將盡快與您聯繫。`);
+                        alert(`誓約已加密送達！\n\n您已正式加入反抗陣線。資料已受海外最高級別加密鎖死，沒有任何人能查閱。\n請耐心等待集結信號，我們準備向高層討回公道！`);
                         
                         form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
 
                     } catch (error) {
-                        alert('發生錯誤：網路連線異常或寫入失敗，請稍後再試。 (' + error.message + ')');
+                        alert('突圍失敗：請確認網路連線是否遭攔截，或稍後再試。 (' + error.message + ')');
                     } finally {
                         isSubmitting.value = false;
                     }
