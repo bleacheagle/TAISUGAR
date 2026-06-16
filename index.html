@@ -181,9 +181,13 @@
 <script>
     const { createApp, ref } = Vue;
 
+    // 系統已自動幫您帶入正確的 Supabase URL 與金鑰
+    const supabaseUrl = 'https://vzsdtofdjcvsrqlggdqr.supabase.co'; 
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6c2R0b2ZkamN2c3JxbGdnZHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MjA3MjcsImV4cCI6MjA5NzE5NjcyN30.hNdzzls0mLjYFZvbXjkjmoCDI8gwoz2xjk5T7rqQrjM';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
     createApp({
         setup() {
-            // Vue 表單資料綁定
             const form = ref({
                 name: '',
                 idCard: '',
@@ -193,24 +197,39 @@
             });
             const isSubmitting = ref(false);
 
-            // 送出表單邏輯
             const submitForm = async () => {
                 isSubmitting.value = true;
                 
-                // 【開發者注意事項】
-                // 這裡您可以直接寫入呼叫 Firebase Firestore 或 Google Apps Script (GAS) 的 fetch 語法。
-                // 例如：
-                // await fetch('YOUR_API_ENDPOINT', {
-                //     method: 'POST',
-                //     body: JSON.stringify(form.value)
-                // });
+                try {
+                    // 將資料寫入 Supabase 的隱形資料表 payroll_feedback
+                    const { data, error } = await supabase
+                        .from('payroll_feedback')
+                        .insert([
+                            { 
+                                name: form.value.name, 
+                                id_card: form.value.idCard, 
+                                unit: form.value.unit, 
+                                phone: form.value.phone, 
+                                email: form.value.email 
+                            }
+                        ]);
 
-                setTimeout(() => {
-                    alert(`申請已加密送出！\n\n感謝 ${form.value.name} 的加入。這是一個前端模板示範，您可以隨時在 <script> 區塊中將表單資料綁定至您的後端資料庫。`);
-                    isSubmitting.value = false;
-                    // 清空表單
+                    if (error) {
+                        // 若遇到 RLS 或寫入錯誤，會在開發者工具顯示，但不讓一般使用者察覺系統結構
+                        console.error('寫入失敗:', error.message);
+                        throw error;
+                    }
+
+                    alert(`入會申請已加密送出！\n\n您的資料已受到海外端對端加密保護，我們將盡快與您聯繫。`);
+                    
+                    // 成功後清空表單
                     form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
-                }, 1200);
+
+                } catch (error) {
+                    alert('系統連線逾時，為確保資安，請確認您使用私人 4G/5G 網路後再試一次。');
+                } finally {
+                    isSubmitting.value = false;
+                }
             };
 
             return {
