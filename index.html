@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>台灣國營與泛公股事業勞工產業工會 | 奪回加班費</title>
-    <!-- 引入 Tailwind CSS 進行快速高質感切版 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 Vue 3 核心，方便您後續無縫串接 Firebase -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* 隱藏滾動條但保留滾動功能 */
         ::-webkit-scrollbar { width: 8px; }
@@ -20,7 +19,6 @@
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
 <div id="app">
-    <!-- 導覽列 -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
         <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="font-bold text-xl text-slate-900 tracking-wider">
@@ -32,7 +30,6 @@
         </div>
     </nav>
 
-    <!-- 區塊一：首頁橫幅 (Hero) -->
     <section class="pt-32 pb-20 px-4 bg-slate-900 text-white text-center">
         <div class="max-w-3xl mx-auto">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
@@ -49,7 +46,6 @@
         </div>
     </section>
 
-    <!-- 區塊二：痛點對決 -->
     <section class="py-20 px-4 bg-white">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-12">你還在「被自願」做功德嗎？</h2>
@@ -76,10 +72,8 @@
         </div>
     </section>
 
-    <!-- 區塊三 & 四：戰略與資安 -->
     <section class="py-20 px-4 bg-slate-100">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-            <!-- 戰略 -->
             <div>
                 <h2 class="text-3xl font-bold mb-8">我們的致勝戰略</h2>
                 <div class="space-y-6">
@@ -107,7 +101,6 @@
                 </div>
             </div>
             
-            <!-- 資安 -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
                 <h2 class="text-2xl font-bold mb-6 flex items-center">
                     <span class="mr-2">🔒</span> 最高機密級保護
@@ -130,7 +123,6 @@
         </div>
     </section>
 
-    <!-- 區塊五：數位入會表單 -->
     <section id="join-section" class="py-20 px-4 bg-slate-900 text-white">
         <div class="max-w-md mx-auto">
             <h2 class="text-3xl font-bold text-center mb-4">加密入會申請</h2>
@@ -171,7 +163,6 @@
         </div>
     </section>
 
-    <!-- 頁尾 -->
     <footer class="bg-black py-8 text-center text-slate-500 text-sm">
         <p>© 2026 台灣公共服務事業工會籌備處. All rights reserved.</p>
     </footer>
@@ -215,7 +206,6 @@
                         ]);
 
                     if (error) {
-                        // 若遇到 RLS 或寫入錯誤，會在開發者工具顯示，但不讓一般使用者察覺系統結構
                         console.error('寫入失敗:', error.message);
                         throw error;
                     }
@@ -226,7 +216,7 @@
                     form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
 
                 } catch (error) {
-                    alert('系統連線逾時，為確保資安，請確認您使用私人 4G/5G 網路後再試一次。');
+                    alert('發生錯誤：請確認後端資料表是否已建立，或檢查網路連線狀態。');
                 } finally {
                     isSubmitting.value = false;
                 }
