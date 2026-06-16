@@ -170,65 +170,73 @@
 </div>
 
 <script>
-    const { createApp, ref } = Vue;
+    // 加上 try-catch 防呆機制，如果載入失敗會直接彈出警告，不會沒反應
+    try {
+        const { createApp, ref } = Vue;
 
-    // 系統已自動幫您帶入正確的 Supabase URL 與金鑰
-    const supabaseUrl = 'https://vzsdtofdjcvsrqlggdqr.supabase.co'; 
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6c2R0b2ZkamN2c3JxbGdnZHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MjA3MjcsImV4cCI6MjA5NzE5NjcyN30.hNdzzls0mLjYFZvbXjkjmoCDI8gwoz2xjk5T7rqQrjM';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        // 系統金鑰
+        const supabaseUrl = 'https://vzsdtofdjcvsrqlggdqr.supabase.co'; 
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6c2R0b2ZkamN2c3JxbGdnZHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MjA3MjcsImV4cCI6MjA5NzE5NjcyN30.hNdzzls0mLjYFZvbXjkjmoCDI8gwoz2xjk5T7rqQrjM';
+        
+        // 【關鍵修復】將變數名稱改為 supabaseClient，避免與官方套件名稱衝突
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    createApp({
-        setup() {
-            const form = ref({
-                name: '',
-                idCard: '',
-                unit: '',
-                phone: '',
-                email: ''
-            });
-            const isSubmitting = ref(false);
+        createApp({
+            setup() {
+                const form = ref({
+                    name: '',
+                    idCard: '',
+                    unit: '',
+                    phone: '',
+                    email: ''
+                });
+                const isSubmitting = ref(false);
 
-            const submitForm = async () => {
-                isSubmitting.value = true;
-                
-                try {
-                    // 將資料寫入 Supabase 的隱形資料表 payroll_feedback
-                    const { data, error } = await supabase
-                        .from('payroll_feedback')
-                        .insert([
-                            { 
-                                name: form.value.name, 
-                                id_card: form.value.idCard, 
-                                unit: form.value.unit, 
-                                phone: form.value.phone, 
-                                email: form.value.email 
-                            }
-                        ]);
-
-                    if (error) {
-                        console.error('寫入失敗:', error.message);
-                        throw error;
-                    }
-
-                    alert(`入會申請已加密送出！\n\n您的資料已受到海外端對端加密保護，我們將盡快與您聯繫。`);
+                const submitForm = async () => {
+                    isSubmitting.value = true;
                     
-                    // 成功後清空表單
-                    form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
+                    try {
+                        // 使用 supabaseClient 寫入資料
+                        const { data, error } = await supabaseClient
+                            .from('payroll_feedback')
+                            .insert([
+                                { 
+                                    name: form.value.name, 
+                                    id_card: form.value.idCard, 
+                                    unit: form.value.unit, 
+                                    phone: form.value.phone, 
+                                    email: form.value.email 
+                                }
+                            ]);
 
-                } catch (error) {
-                    alert('發生錯誤：請確認後端資料表是否已建立，或檢查網路連線狀態。');
-                } finally {
-                    isSubmitting.value = false;
-                }
-            };
+                        if (error) {
+                            console.error('寫入失敗:', error.message);
+                            throw error;
+                        }
 
-            return {
-                form,
-                isSubmitting,
-                submitForm
-            };
-        }
-    }).mount('#app');
+                        alert(`入會申請已加密送出！\n\n您的資料已受到海外端對端加密保護，我們將盡快與您聯繫。`);
+                        
+                        // 成功後清空表單
+                        form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
+
+                    } catch (error) {
+                        alert('發生錯誤：網路連線異常或寫入失敗，請稍後再試。 (' + error.message + ')');
+                    } finally {
+                        isSubmitting.value = false;
+                    }
+                };
+
+                return {
+                    form,
+                    isSubmitting,
+                    submitForm
+                };
+            }
+        }).mount('#app');
+
+    } catch (err) {
+        alert('系統初始化失敗：' + err.message);
+    }
 </script>
 
 </body>
