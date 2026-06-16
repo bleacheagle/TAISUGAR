@@ -1,49 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>嵌入 Google Sheets 并打印</title>
+    <title>台灣國營與泛公股事業勞工產業工會 | 奪回加班費</title>
+    <!-- 引入 Tailwind CSS 進行快速高質感切版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Vue 3 核心，方便您後續無縫串接 Firebase -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-        #printButton {
-            display: block;
-            margin: 20px auto;
-            padding: 15px 30px;
-            font-size: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        #printButton:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-
-        #printButton:active {
-            background-color: #3e8e41;
-            transform: scale(1);
-        }
+        /* 隱藏滾動條但保留滾動功能 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- 嵌入 Google Sheets -->
-    <iframe id="spreadsheetFrame" src="https://docs.google.com/spreadsheets/d/1QYTE-jwVSfZx29yzKEIOW9WZX-TJRD6cO-Ux5klVqiY/edit?rm=minimal" width="100%" height="1000"></iframe>
+<div id="app">
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="font-bold text-xl text-slate-900 tracking-wider">
+                🛡️ 台灣公共服務事業工會
+            </div>
+            <a href="#join-section" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                匿名入會
+            </a>
+        </div>
+    </nav>
 
-    <!-- 打印按钮 -->
-    <button id="printButton" onclick="openPrintPage()">列印報表</button>
+    <!-- 區塊一：首頁橫幅 (Hero) -->
+    <section class="pt-32 pb-20 px-4 bg-slate-900 text-white text-center">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+                拿回屬於我們的加班費<br><span class="text-blue-400">這次，我們自己爭。</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed">
+                拒絕違法潛規則，拒絕失能的舊體制。<br>
+                誠摯邀請您匿名加入，集結過半力量，奪回勞工選擇權。
+            </p>
+            <a href="#join-section" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-lg text-lg shadow-lg shadow-blue-500/30 transition transform hover:-translate-y-1">
+                立即安全入會 ➔
+            </a>
+            <p class="mt-4 text-sm text-slate-400">⚠️ 請使用個人手機網路 (4G/5G) 瀏覽，切勿使用公司 Wi-Fi</p>
+        </div>
+    </section>
 
-    <script>
-        function openPrintPage() {
-            var printUrl = "https://docs.google.com/spreadsheets/d/1QYTE-jwVSfZx29yzKEIOW9WZX-TJRD6cO-Ux5klVqiY/export?exportFormat=pdf&format=pdf&size=A4&portrait=false&fitw=true&sheetnames=false&printtitle=false&pagenumbers=false&gridlines=false&fzr=true&top_margin=0.5&bottom_margin=0.5&left_margin=0.5&right_margin=0.5";
-            window.open(printUrl, '_blank');
+    <!-- 區塊二：痛點對決 -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">你還在「被自願」做功德嗎？</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-red-50 p-8 rounded-2xl border border-red-100 shadow-sm">
+                    <h3 class="text-xl font-bold text-red-700 mb-4">❌ 公司的違法現況</h3>
+                    <ul class="space-y-3 text-slate-700">
+                        <li>• 系統卡死，完全沒有加班費申請選項</li>
+                        <li>• 長官明示暗示，規定「一律只能補休」</li>
+                        <li>• 補休期限一到自動歸零，血汗白流</li>
+                        <li>• 體制內舊工會雙手一攤，幫公司背書</li>
+                    </ul>
+                </div>
+                <div class="bg-emerald-50 p-8 rounded-2xl border border-emerald-100 shadow-sm">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-4">✅ 勞動基準法真相</h3>
+                    <ul class="space-y-3 text-slate-700">
+                        <li>• 依第 32-1 條，加班費/補休選擇權在勞工</li>
+                        <li>• 公司單方面強制補休，面臨高額行政罰鍰</li>
+                        <li>• 補休未休畢，依法仍須折算加班費發給</li>
+                        <li>• 只要我們團結過半，公司依法無法拒絕協商</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 區塊三 & 四：戰略與資安 -->
+    <section class="py-20 px-4 bg-slate-100">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+            <!-- 戰略 -->
+            <div>
+                <h2 class="text-3xl font-bold mb-8">我們的致勝戰略</h2>
+                <div class="space-y-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
+                        <div class="ml-4">
+                            <h4 class="text-xl font-bold">隱密串聯</h4>
+                            <p class="text-slate-600 mt-1">透過本站全程加密註冊，公司高層無從得知您的身分。</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">2</div>
+                        <div class="ml-4">
+                            <h4 class="text-xl font-bold">集結過半</h4>
+                            <p class="text-slate-600 mt-1">依法招募超過 50% 員工（目標 1500 人）加入本產業工會。</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">3</div>
+                        <div class="ml-4">
+                            <h4 class="text-xl font-bold">強制協商與勞檢</h4>
+                            <p class="text-slate-600 mt-1">人數達標後，直接發動團體協約與跨縣市集體勞檢，公司無法拒絕。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 資安 -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">🔒</span> 最高機密級保護
+                </h2>
+                <ul class="space-y-4 text-slate-700">
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <div><strong>主機境外化：</strong>資料庫架設於海外雲端，政風與資訊處絕對無法查閱。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <div><strong>名單絕對保密：</strong>未達過半協商門檻前，工會絕不對外公布會員名冊。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <div><strong>通訊隔離：</strong>本站不留存連線 IP，阻絕公司內網監控。</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 區塊五：數位入會表單 -->
+    <section id="join-section" class="py-20 px-4 bg-slate-900 text-white">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4">加密入會申請</h2>
+            <p class="text-center text-slate-400 mb-8">所有資料經端對端加密，僅供工會法定造冊使用</p>
+            
+            <form @submit.prevent="submitForm" class="bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-700">
+                
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">真實姓名</label>
+                    <input v-model="form.name" type="text" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="請輸入本名">
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">身分證字號</label>
+                    <input v-model="form.idCard" type="text" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="法定入會必備">
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">所屬單位 (處/部/站)</label>
+                    <input v-model="form.unit" type="text" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="例如：ＯＯ區處 / ＯＯ加油站">
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">私人手機號碼</label>
+                    <input v-model="form.phone" type="tel" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="09XX-XXX-XXX">
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">私人 Email</label>
+                    <input v-model="form.email" type="email" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white" placeholder="禁用公司信箱">
+                </div>
+
+                <button type="submit" :disabled="isSubmitting" class="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-600 text-white font-bold py-4 px-4 rounded-lg transition-colors flex justify-center items-center">
+                    <span v-if="!isSubmitting">加密送出申請</span>
+                    <span v-else>處理中...</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-black py-8 text-center text-slate-500 text-sm">
+        <p>© 2026 台灣公共服務事業工會籌備處. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+        setup() {
+            // Vue 表單資料綁定
+            const form = ref({
+                name: '',
+                idCard: '',
+                unit: '',
+                phone: '',
+                email: ''
+            });
+            const isSubmitting = ref(false);
+
+            // 送出表單邏輯
+            const submitForm = async () => {
+                isSubmitting.value = true;
+                
+                // 【開發者注意事項】
+                // 這裡您可以直接寫入呼叫 Firebase Firestore 或 Google Apps Script (GAS) 的 fetch 語法。
+                // 例如：
+                // await fetch('YOUR_API_ENDPOINT', {
+                //     method: 'POST',
+                //     body: JSON.stringify(form.value)
+                // });
+
+                setTimeout(() => {
+                    alert(`申請已加密送出！\n\n感謝 ${form.value.name} 的加入。這是一個前端模板示範，您可以隨時在 <script> 區塊中將表單資料綁定至您的後端資料庫。`);
+                    isSubmitting.value = false;
+                    // 清空表單
+                    form.value = { name: '', idCard: '', unit: '', phone: '', email: '' };
+                }, 1200);
+            };
+
+            return {
+                form,
+                isSubmitting,
+                submitForm
+            };
         }
-    </script>
+    }).mount('#app');
+</script>
 
 </body>
 </html>
